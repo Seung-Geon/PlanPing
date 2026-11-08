@@ -11,6 +11,15 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.nio.file.AccessDeniedException;
 
+/**
+ * <pre>
+ *  Class Name: GlobalExceptionHandler
+ *  Description: 전역 예외 처리를 위한 @RestControllerAdvice
+ *
+ *  History
+ *  2026.11.08: Seung-Geon: 클래스 생성 및 기본 처리
+ * </pre>
+ */
 @Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {
