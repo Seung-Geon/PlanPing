@@ -49,9 +49,8 @@ public class CustomResponse<T> {
     /**
      * 반환하는 데이터가 없는 성공 응답
      *
-     * @param code
-     * @return CustomResponse
-     * @param <T>
+     * @param <T> 데이터가 없기 때문에 `Void` 고정
+     * @param code 성공 코드{@link ResponseCode}
      */
     public static <T> CustomResponse<T> success(ResponseCode code) {
         return new CustomResponse<>(code.getCode(), code.getMessage(), null);
@@ -60,10 +59,9 @@ public class CustomResponse<T> {
     /**
      * 반환하는 데이터가 있는 성공 응답
      *
-     * @param code
-     * @param data
-     * @return CustomResponse
-     * @param <T>
+     * @param <T> data의 자료형
+     * @param code 성공 코드{@link ResponseCode}
+     * @param data 반환하는 데이터
      */
     public static <T> CustomResponse<T> success(ResponseCode code, T data) {
         return new CustomResponse<>(code.getCode(), code.getMessage(), data);
@@ -72,12 +70,22 @@ public class CustomResponse<T> {
     /**
      * 요청 처리 실패 응답
      *
-     * @param code
-     * @return
-     * @param <T>
+     * @param <T> 데이터가 없기 때문에 `Void` 고정
+     * @param code 실패 코드{@link ResponseCode}
      */
     public static <T> CustomResponse<T> error(ResponseCode code) {
         return new CustomResponse<>(code.getCode(), code.getMessage(), null);
+    }
+
+    /**
+     * 요청 처리 실패 응답(message를 직접 지정한 경우)
+     *
+     * @param <T> 데이터가 없기 때문에 `Void` 고정
+     * @param code 실패 코드{@link ResponseCode}
+     * @param message 응답에 담길 message
+     */
+    public static <T> CustomResponse<T> error(ResponseCode code, String message) {
+        return new CustomResponse<>(code.getCode(),message, null);
     }
 
 }
