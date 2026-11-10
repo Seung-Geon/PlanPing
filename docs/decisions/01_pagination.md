@@ -30,6 +30,38 @@
 2. JSON의 비대화 방지
 3. Entity -> DTO 변환은 페이징 유무와 상관없이 항상 존재하는 과정으로, 추가적인 단점이 되지 않음
 
+* Page\<T\>에 있는 필드
+```
+{
+  "content": [ ... ],                // O: 실제 데이터 리스트 (필요함)
+  "pageable": {                      // X: 불필요
+    "pageNumber": 0,
+    "pageSize": 10,
+    "sort": {
+      "sorted": true,
+      "unsorted": false,
+      "empty": false
+    },
+    "offset": 0,
+    "paged": true,
+    "unpaged": false
+  },
+  "totalElements": 45,               // O: 전체 데이터 개수 (필요할 수 있음)
+  "totalPages": 5,                   // O: 전체 페이지 수 (필요함)
+  "last": false,                     // O: 마지막 페이지 여부 (필요함)
+  "size": 10,                        // X: 'pageSize'와 중복됨
+  "number": 0,                       // X: 'pageNumber'와 이름이 직관적이지 않음 (보통 0부터 시작해서 혼동 줌)
+  "sort": {                          // X: 'pageable' 안에도 있고 바깥에도 중복으로 들어감
+    "sorted": true,
+    "unsorted": false,
+    "empty": false
+  },
+  "numberOfElements": 10,            // X: 현재 페이지의 데이터 개수는 content.length로 바로 알 수 있음
+  "first": true,                     // O: 첫 번째 페이지 여부 (가끔 쓰임)
+  "empty": false                     // X: 비어있는지 여부는 content.length == 0 으로 쉽게 확인 가능
+}
+```
+
 ## 5. 예상 결과 및 트레이드오프 (Consequences)
 * **긍정적 효과:** 프론트엔드에서 실제 필요한 페이징 데이터만 깔끔하고 직관적인 구조로 받을 수 있음
 * **부정적 효과 (Trade-off):** 새로운 페이징 목록 조회 API를 만들 대마다 Entity -> DTO 변환 과정 또는 매핑 코드를 반복 작성해야 한다.
