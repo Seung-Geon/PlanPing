@@ -6,6 +6,15 @@ import lombok.ToString;
 
 import java.util.List;
 
+/**
+ * <pre>
+ * Class Name: PageResponseDto
+ * Description: 페이지네이션 응답을 위한 DTO 클래스
+ *
+ * History
+ * 2026.11.11: 클래스 생성
+ * </pre>
+ */
 @Getter
 @ToString
 public class PageResponseDto<T> {
